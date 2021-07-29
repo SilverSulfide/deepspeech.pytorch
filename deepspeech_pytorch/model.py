@@ -236,15 +236,15 @@ class DeepSpeech(pl.LightningModule):
         inputs, targets, input_percentages, target_sizes = batch
         input_sizes = input_percentages.mul_(int(inputs.size(3))).int()
         out, output_sizes = self(inputs, input_sizes)
-        print("****** DEBUG *******")
-        print("Targets ", targets.size())
-        print()
-        print(targets)
-        print()
-        print("Out ", out.size())
-        print()
-        print(out)
-        print()
+        # print("****** DEBUG *******")
+        # print("Targets ", targets.size())
+        # print()
+        # print(targets)
+        # print()
+        # print("Out ", out.size())
+        # print()
+        # print(out)
+        # print()
         out = out.transpose(0, 1)  # TxNxH
         out = out.log_softmax(-1)
 
@@ -258,6 +258,9 @@ class DeepSpeech(pl.LightningModule):
         with autocast(enabled=self.precision == 16):
             out, output_sizes = self(inputs, input_sizes)
         decoded_output, _ = self.evaluation_decoder.decode(out, output_sizes)
+        print("***** DECODER DEBUG ******")
+        print("size: ", out.size())
+        print(out)
         self.wer(
             preds=out,
             preds_sizes=output_sizes,
