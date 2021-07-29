@@ -241,7 +241,7 @@ class DeepSpeech(pl.LightningModule):
         # print()
         # print(targets)
         # print()
-        print("Out ", out.size())
+        print("Out ", out.size(), output_sizes)
         out = out.transpose(0, 1)  # TxNxH
         out = out.log_softmax(-1)
 
