@@ -88,4 +88,7 @@ def run_transcribe(audio_path: str,
     with autocast(enabled=precision == 16):
         out, output_sizes = model(spect, input_sizes)
     decoded_output, decoded_offsets = decoder.decode(out, output_sizes)
+    frames = spect.size(-1)
+    print("Spect:", spect.size())
+    print("Frames:", frames)
     return decoded_output, decoded_offsets
