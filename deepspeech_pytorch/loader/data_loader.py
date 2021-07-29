@@ -19,7 +19,7 @@ torchaudio.set_audio_backend("sox_io")
 
 def load_audio(path):
     sound, sample_rate = torchaudio.load(path)
-    print("Len of single file: ", sound.shape[-1]/sample_rate)
+    print("Len of single file:", sound.shape[-1]/sample_rate, "s, frames:", sound.shape[-1])
     if sound.shape[0] == 1:
         sound = sound.squeeze()
     else:
@@ -129,7 +129,7 @@ class SpectrogramParser(AudioParser):
 
         if self.aug_conf and self.aug_conf.spec_augment:
             spect = spec_augment(spect)
-
+        print("Corresponding spectogram size:", spect.size())
         return spect
 
     def parse_transcript(self, transcript_path):
@@ -217,6 +217,7 @@ def _collate_fn(batch):
         target_sizes[x] = len(target)
         targets.extend(target)
     targets = torch.tensor(targets, dtype=torch.long)
+    print("Corresponding batch size:", targets.size())
     return inputs, targets, input_percentages, target_sizes
 
 
