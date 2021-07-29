@@ -259,8 +259,8 @@ class DeepSpeech(pl.LightningModule):
             out, output_sizes = self(inputs, input_sizes)
         decoded_output, _ = self.evaluation_decoder.decode(out, output_sizes)
         print("***** DECODER DEBUG ******")
-        print("size: ", out.size())
-        print(out)
+        print("size: ", decoded_output.size())
+        print(decoded_output)
         self.wer(
             preds=out,
             preds_sizes=output_sizes,
