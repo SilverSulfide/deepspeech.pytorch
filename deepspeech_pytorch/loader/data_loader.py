@@ -217,7 +217,7 @@ def _collate_fn(batch):
         target_sizes[x] = len(target)
         targets.extend(target)
     targets = torch.tensor(targets, dtype=torch.long)
-    print("Corresponding batch size:", targets.size())
+    print("Corresponding batch size:", inputs.size())
     return inputs, targets, input_percentages, target_sizes
 
 
