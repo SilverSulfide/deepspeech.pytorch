@@ -236,8 +236,6 @@ class DeepSpeech(pl.LightningModule):
         inputs, targets, input_percentages, target_sizes = batch
         input_sizes = input_percentages.mul_(int(inputs.size(3))).int()
         out, output_sizes = self(inputs, input_sizes)
-        out = out.transpose(0, 1)  # TxNxH
-        out = out.log_softmax(-1)
         print("****** DEBUG *******")
         print("Targets ", targets.size())
         print()
@@ -247,6 +245,8 @@ class DeepSpeech(pl.LightningModule):
         print()
         print(out)
         print()
+        out = out.transpose(0, 1)  # TxNxH
+        out = out.log_softmax(-1)
 
         loss = self.criterion(out, targets, output_sizes, target_sizes)
         return loss
