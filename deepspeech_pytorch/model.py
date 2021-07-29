@@ -238,6 +238,15 @@ class DeepSpeech(pl.LightningModule):
         out, output_sizes = self(inputs, input_sizes)
         out = out.transpose(0, 1)  # TxNxH
         out = out.log_softmax(-1)
+        print("****** DEBUG *******")
+        print("Targets ", targets.size())
+        print()
+        print(targets)
+        print()
+        print("Out ", out.size())
+        print()
+        print(out)
+        print()
 
         loss = self.criterion(out, targets, output_sizes, target_sizes)
         return loss
