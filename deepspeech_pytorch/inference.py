@@ -91,4 +91,5 @@ def run_transcribe(audio_path: str,
     frames = spect.size(-1)
     print("Spect:", spect.size())
     print("Frames:", frames)
+    print("Second offsets:", decoded_offsets*(((frames-1)/100)/out.size(-1)))
     return decoded_output, decoded_offsets
