@@ -91,7 +91,7 @@ def run_transcribe(audio_path: str,
     frames = spect.size(-1)
     print("Spect:", spect.size())
     print("Frames:", frames)
-    print(decoded_offsets)
+    decoded_offsets = decoded_offsets[0].to_numpy()
     scalar = (((frames-1)/100)/out.size(-1))
     print("Second offsets:", [i*scalar for i in decoded_offsets])
     return decoded_output, decoded_offsets
