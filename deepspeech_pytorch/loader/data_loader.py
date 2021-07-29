@@ -19,6 +19,7 @@ torchaudio.set_audio_backend("sox_io")
 
 def load_audio(path):
     sound, sample_rate = torchaudio.load(path)
+    print("Len of single file: ", sound.shape[-1]/sample_rate)
     if sound.shape[0] == 1:
         sound = sound.squeeze()
     else:
